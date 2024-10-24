@@ -45,8 +45,7 @@ export const DenseTable = ({ changes }: DenseTableProps) => {
 export const ChangelogFetchComponent = () => {
   const config = useApi(configApiRef);
   const { value, loading, error } = useAsync(async (): Promise<Change[]> => {
-    // TODO: fetch
-    const response = await fetch(`${config.getString('backend.baseUrl')}/api/proxy/inscope-resources/resources/yaml/configmap-change-log.yaml`)
+    const response = await fetch(`${config.getString('backend.baseUrl')}/api/proxy/inscope-resources/resources/yaml/change-log.yaml`)
       .catch(e => e)
       .then(resp => resp);
     if (!response.ok) {
