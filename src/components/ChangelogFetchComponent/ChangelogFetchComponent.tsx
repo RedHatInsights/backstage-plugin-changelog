@@ -53,14 +53,6 @@ export const ChangelogFetchComponent = () => {
     const changes = await response.text();
     console.log(changes);
 
-    //
-    // let config_map;
-    // try {
-    //   config_map = parse(changes);
-    // } catch {
-    //   // TODO: Return error
-    // }
-    // console.log(config_map);
 
     let change_data;
     try {
