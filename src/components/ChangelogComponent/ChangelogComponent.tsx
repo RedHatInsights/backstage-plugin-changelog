@@ -29,13 +29,3 @@ export const ChangelogComponent = () => (
     </Content>
   </Page>
 );
-        // <Grid item>
-        //   <InfoCard title="Information card">
-        //     <Typography variant="body1">
-        //       All content should be wrapped in a card like this.
-        //     </Typography>
-        //   </InfoCard>
-        // </Grid>
-        // <Grid item>
-        //   <ExampleFetchComponent />
-        // </Grid>

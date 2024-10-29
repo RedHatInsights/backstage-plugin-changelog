@@ -2,7 +2,6 @@ import React from 'react';
 import { Table, TableColumn, Progress, ResponseErrorPanel } from '@backstage/core-components';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
 import useAsync from 'react-use/lib/useAsync';
-import { parse } from 'yaml';
 
 type Change = {
   commit: string;
@@ -45,28 +44,31 @@ export const DenseTable = ({ changes }: DenseTableProps) => {
 export const ChangelogFetchComponent = () => {
   const config = useApi(configApiRef);
   const { value, loading, error } = useAsync(async (): Promise<Change[]> => {
-    const response = await fetch(`${config.getString('backend.baseUrl')}/api/proxy/inscope-resources/resources/yaml/change-log.yaml`)
+    const response = await fetch(`${config.getString('backend.baseUrl')}/api/proxy/inscope-resources/resources/json/change-log.json`)
       .catch(e => e)
       .then(resp => resp);
     if (!response.ok) {
       // TODO: Return error
     }
     const changes = await response.text();
+    console.log(changes);
 
-
-    let config_map;
-    try {
-      config_map = parse(changes);
-    } catch {
-      // TODO: Return error
-    }
+    //
+    // let config_map;
+    // try {
+    //   config_map = parse(changes);
+    // } catch {
+    //   // TODO: Return error
+    // }
+    // console.log(config_map);
 
     let change_data;
     try {
-      change_data = JSON.parse(config_map.data["change-log.json"]);
+      change_data = JSON.parse(changes);
     } catch {
       // TODO: Return error
     }
+    console.log(change_data);
 
     return change_data.items;
   }, []);
